@@ -3,263 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Graham</title>
+<title>Graham Login</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:tahoma;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:tahoma}
 
 body{
 background:linear-gradient(135deg,#0f172a,#1e1b4b);
-min-height:100vh;
 color:white;
+min-height:100vh;
 }
 
-.container{
-width:90%;
-max-width:900px;
-margin:auto;
-padding:20px;
+/* LOGIN */
+.login-box{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+flex-direction:column;
 }
 
-.logo{
+input{
 width:250px;
-max-width:90%;
-display:block;
-margin:20px auto;
-filter:drop-shadow(0 0 25px #7c3aed);
+padding:12px;
+margin:8px;
+border:none;
+border-radius:10px;
+outline:none;
 }
 
-.title{
-text-align:center;
-font-size:50px;
+.login-btn{
+width:250px;
+padding:12px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+color:white;
 font-weight:bold;
-background:linear-gradient(90deg,#3b82f6,#a855f7);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+cursor:pointer;
 }
 
-.subtitle{
-text-align:center;
-margin-bottom:25px;
-opacity:.8;
-}
+/* APP */
+.container{display:none;padding:20px;}
+
+.page{display:none;}
+.active{display:block;}
 
 .card{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
+background:rgba(255,255,255,.06);
 padding:20px;
-border-radius:20px;
-margin-top:20px;
+border-radius:15px;
+margin-top:15px;
+backdrop-filter:blur(10px);
 }
 
 .btn{
 display:block;
 width:100%;
-padding:15px;
+padding:12px;
 margin:10px 0;
-text-decoration:none;
+border-radius:10px;
 border:none;
-border-radius:15px;
 cursor:pointer;
-font-size:18px;
-font-weight:bold;
-color:white;
 background:linear-gradient(90deg,#2563eb,#7c3aed);
-transition:.3s;
-}
-
-.btn:hover{
-transform:scale(1.03);
-}
-
-.page{
-display:none;
-}
-
-.active{
-display:block;
-}
-
-p{
-line-height:2;
-}
-
-h2{
-margin-bottom:15px;
-}
-
-.version{
-text-align:center;
-margin-top:20px;
-opacity:.6;
+color:white;
+font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- LOGIN -->
+<div id="login" class="login-box">
+<h2>ورود به Graham</h2>
 
-<!-- صفحه اصلی -->
+<input id="user" placeholder="نام کاربری">
+<input id="pass" type="password" placeholder="رمز عبور">
+
+<button class="login-btn" onclick="login()">ورود</button>
+</div>
+
+<!-- APP -->
+<div id="app" class="container">
 
 <div id="home" class="page active">
 
-<img src="logo.png" class="logo">
-
-<div class="title">Graham</div>
-
-<div class="subtitle">
-ربات مدیریت گروه روبیکا
-</div>
+<h1>Graham Panel</h1>
 
 <div class="card">
+<p>خوش آمدی 👋 <span id="username"></span></p>
 
-<a class="btn" href="https://rubika.ir/GrahamBot" target="_blank">
-🤖 ورود به ربات
-</a>
-
-<button class="btn" onclick="showPage('account')">
-👤 حساب کاربری
-</button>
-
-<button class="btn" onclick="showPage('admin')">
-🛠️ پنل مدیریت
-</button>
-
-<button class="btn" onclick="showPage('news')">
-📰 اخبار و آپدیت‌ها
-</button>
-
-<button class="btn" onclick="showPage('about')">
-ℹ️ درباره ما
-</button>
-
-</div>
-
-<div class="version">
-Version 1.0
+<button class="btn" onclick="logout()">خروج</button>
+<button class="btn" onclick="showPage('account')">حساب کاربری</button>
 </div>
 
 </div>
-
-<!-- حساب کاربری -->
 
 <div id="account" class="page">
-
-<h1 class="title">حساب کاربری</h1>
+<h2>حساب کاربری</h2>
 
 <div class="card">
-
-<p>نام کاربر: Armin</p>
-<p>سطح کاربر: 12</p>
+<p>نام: <span id="u2"></span></p>
+<p>سطح: 12</p>
 <p>امتیاز: 1540</p>
-<p>شناسه: 1001</p>
-
 </div>
 
-<button class="btn" onclick="showPage('home')">
-بازگشت
-</button>
-
-</div>
-
-<!-- پنل مدیریت -->
-
-<div id="admin" class="page">
-
-<h1 class="title">پنل مدیریت</h1>
-
-<div class="card">
-
-<p>وضعیت ربات: فعال ✅</p>
-<p>تعداد کاربران: 1250</p>
-<p>تعداد گروه‌ها: 42</p>
-<p>پیام‌های پردازش شده: 95000</p>
-
-</div>
-
-<button class="btn" onclick="showPage('home')">
-بازگشت
-</button>
-
-</div>
-
-<!-- اخبار -->
-
-<div id="news" class="page">
-
-<h1 class="title">اخبار و آپدیت‌ها</h1>
-
-<div class="card">
-
-<p>✅ نسخه 1.0 منتشر شد.</p>
-<p>✅ طراحی آبی و بنفش اضافه شد.</p>
-<p>✅ بهبود عملکرد Graham.</p>
-
-</div>
-
-<button class="btn" onclick="showPage('home')">
-بازگشت
-</button>
-
-</div>
-
-<!-- درباره ما -->
-
-<div id="about" class="page">
-
-<h1 class="title">درباره Graham</h1>
-
-<div class="card">
-
-<p>
-Graham یک ربات مدیریت گروه برای روبیکا است.
-</p>
-
-<p>
-این ربات امکاناتی مانند خوش‌آمدگویی، پاسخ خودکار،
-بازی، مدیریت گروه و ابزارهای مختلف مدیریتی را
-در اختیار کاربران قرار می‌دهد.
-</p>
-
-<p>
-هدف Graham ارائه یک تجربه سریع، هوشمند و حرفه‌ای
-برای مدیران و کاربران روبیکا است.
-</p>
-
-<p>
-توسعه‌دهنده: Armin 🚀
-</p>
-
-</div>
-
-<button class="btn" onclick="showPage('home')">
-بازگشت
-</button>
-
+<button class="btn" onclick="showPage('home')">بازگشت</button>
 </div>
 
 </div>
 
 <script>
-function showPage(id){
 
-document.querySelectorAll('.page')
-.forEach(page=>{
-page.classList.remove('active');
-});
-
-document.getElementById(id)
-.classList.add('active');
-
-window.scrollTo(0,0);
-
+// check login
+if(localStorage.getItem("logged")=="true"){
+showApp();
 }
+
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u.length<3 || p.length<3){
+alert("نام کاربری یا رمز کوتاهه");
+return;
+}
+
+localStorage.setItem("logged","true");
+localStorage.setItem("user",u);
+
+showApp();
+}
+
+function showApp(){
+document.getElementById("login").style.display="none";
+document.getElementById("app").style.display="block";
+
+let u=localStorage.getItem("user");
+
+document.getElementById("username").innerText=u;
+document.getElementById("u2").innerText=u;
+}
+
+function logout(){
+localStorage.removeItem("logged");
+localStorage.removeItem("user");
+location.reload();
+}
+
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>{
+p.classList.remove('active');
+});
+document.getElementById(id).classList.add('active');
+}
+
 </script>
 
 </body>
